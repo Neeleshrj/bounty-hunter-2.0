@@ -1,4 +1,4 @@
-ttttttttttttttttt<html>
+<html>
 <title>Register</title>
 
 <head>
