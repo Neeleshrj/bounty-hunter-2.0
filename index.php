@@ -91,14 +91,6 @@
 
 
 <style>
-/* #navbar {
-    z-index: 3;
-
-    height: 200px;
-
-    width: 100%;
-} */
-
 #contactus {
     height: 400px;
     width: 80%;

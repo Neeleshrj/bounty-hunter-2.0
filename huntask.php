@@ -138,7 +138,7 @@
                     <p>Note->This process cannot be reverted.</p>
                 </form> -->
 
-                <br><a href=" huntmenu.php">Back to home</a>
+                <br><a href=" homepage.php">Back to home</a>
             </div>
         </center>
     </div>

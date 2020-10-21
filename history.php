@@ -145,8 +145,7 @@ if (isset($_POST['comp'])) {
 
                 </form>
 
-                <!-- <br> <a href="gethunterinfo.php">Change Status of Tasks</a> -->
-                <br><br><a href="taskmenu.php">Back to home</a>
+                <br><br><a href="homepage.php">Back to home</a>
             </div>
         </center>
     </div>
