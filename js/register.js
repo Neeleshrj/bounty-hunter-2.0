@@ -99,7 +99,7 @@
         if (!result) {
           $(obj).css("border", "#FF0000 1px solid");
           $("#pass_err")
-            .html("Invalid")
+            .html("Must contain Uppercase,lowercase,number and of > 8 length.")
             .css("color", "red")
             .css("font-size", "13px");
           return false;

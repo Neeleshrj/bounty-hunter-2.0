@@ -113,18 +113,18 @@
                 <form method="post">
                     <select class="form-control" name="city" id="city">
 
+                        <option value="New Delhi">New Delhi</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Lucknow">Lucknow</option>
                         <option value="Mirzapur">Mirzapur</option>
                         <option value="Wasseypur">Wasseypur</option>
                         <option value="Agra">Agra</option>
-                        <option value="Chennai">Chennai</option>
-                        <option value="New Delhi">New Delhi</option>
                         <option value="Patna">Patna</option>
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Mumbai">Mumbai</option>
                         <option value="Chandigarh">Chandigarh</option>
                         <option value="Jaipur">Jaipur</option>
-                        <option value="Lucknow">Lucknow</option>
-                        <option value="Bangalore">Bangalore</option>
                     </select><br><br>
                     <input type="submit" name="submit" id="sub_btn" value="View Results">
                 </form>

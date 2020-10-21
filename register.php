@@ -1,4 +1,4 @@
-ttttttttttttttttt<html>
+<html>
 <title>Register</title>
 
 <head>
@@ -9,6 +9,7 @@ ttttttttttttttttt<html>
 </head>
 
 <?php
+        require 'dbconfig/config.php';
         if (isset($_POST['signup_btn'])) {
 
 
@@ -33,6 +34,7 @@ ttttttttttttttttt<html>
 
                     if ($query_run) {
                         echo '<script type="text/javascript"> alert("User Registered!") </script>';
+                        
                         echo '<script>window.location.href = "./index.php";</script>';
                     } else {
                         echo '<script type="text/javascript"> alert("Error!") </script>';
