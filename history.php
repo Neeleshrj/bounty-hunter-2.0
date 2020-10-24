@@ -29,6 +29,21 @@ if (isset($_POST['comp'])) {
         echo '<script type="text/javascript"> alert("Error!Task already completed!") </script>';
     }
 }
+if (isset($_POST['cancel'])) {
+    $tkid = $_POST['taskid'];
+    $status=$_POST['status'];
+    if ($status!="completed"){
+        $query = "UPDATE taskinfo SET status ='completed' WHERE taskid='$tkid' AND status LIKE 'pending' ";
+    $query_run = mysqli_query($con, $query);
+    if ($query_run) {
+        echo '<script type="text/javascript"> alert("Task Status updated successfully!") </script>';
+        
+            } 
+        }
+    else {
+        echo '<script type="text/javascript"> alert("Error!Task already completed!") </script>';
+    }
+}
     
 
 ?>
@@ -48,12 +63,12 @@ if (isset($_POST['comp'])) {
                     <?php echo $_SESSION['username']?>!</button>
                 <a href="index.php"><button id="footbtn"><i class="fas fa-sign-out-alt"
                             style="font-size:36px;"></i>LOGOUT</button></a>
-                <a href=""><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i> HUNT
+                <a href="huntask.php"><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i>
+                        HUNT
                         TASK</button></a>
                 <a href="history.php"><button id="footbtn"><i class="fa fa-server" style="font-size:36px;"></i>
                         HISTORY</button></a>
-                <a href="posttask.php"><button id="footbtn"><i class="fa fa-cubes" aria-hidden="true"
-                            style="font-size:36px;"></i>
+                <a href="posttask.php"><button id="footbtn"><i class="fa fa-cubes" style="font-size:36px;"></i>
                         POST TASK</button></a>
             </ul>
         </center>
@@ -88,23 +103,40 @@ if (isset($_POST['comp'])) {
 
         if (mysqli_num_rows($result) > 0) {
 
-
             while ($row = mysqli_fetch_assoc($result)) {
                 $tkid=$row["taskid"] ;
-                echo "<tr><td>" . $row["taskid"] . "</td><td>" . $row["w_desc"] . "</td><td>" . $row["doc"] . "</td><td>" . "</td><td>" . $row["toc"] . "</td><td>" .
+                if($row["status"] == "in progress"){
+                    echo "<tr><td>" . $row["taskid"] . "</td><td>" . $row["w_desc"] . "</td><td>" . $row["doc"] . "</td><td>" . "</td><td>" . $row["toc"] . "</td><td>" .
                     $row["city"] . "</td><td>" . $row["money"] . "</td><td>" . $row["status"] . "</td><td>" . $row["hunter"] . "</td><td>".                    
                     "<form action='history.php' method='post'>
                             <input type='hidden' name='taskid' value='".$tkid."' />
                             <input type='hidden' name='status' value='".$row["status"]."' />
                             <input type='submit' name='comp' id='add_btn' value='Completed' />";
                     "</form>" . "</td></tr>";
-                    }
-                    } else {
-                    echo "<tr>
-                        <td colspan='9' style='text-align:center;font-size:20px;font-weight:bold;'>" . "No results
-                            found!" . "</td>
-                    <tr>";
+                
                 }
+                else if($row["status"] == "pending"){
+                    echo "<tr><td>" . $row["taskid"] . "</td><td>" . $row["w_desc"] . "</td><td>" . $row["doc"] . "</td><td>" . "</td><td>" . $row["toc"] . "</td><td>" .
+                    $row["city"] . "</td><td>" . $row["money"] . "</td><td>" . $row["status"] . "</td><td>" . $row["hunter"] . "</td><td>".                    
+                    "<form action='history.php' method='post'>
+                            <input type='hidden' name='taskid' value='".$tkid."' />
+                            <input type='hidden' name='status' value='".$row["status"]."' />
+                            <input type='submit' name='cancel' id='add_btn' value='Cancel' />";
+                    "</form>" . "</td></tr>";
+                }
+                else if($row["status"] == "completed") {
+                    echo "<tr><td>" . $row["taskid"] . "</td><td>" . $row["w_desc"] . "</td><td>" . $row["doc"] . "</td><td>" . "</td><td>" . $row["toc"] . "</td><td>" .
+                    $row["city"] . "</td><td>" . $row["money"] . "</td><td>" . $row["status"] . "</td><td>" . $row["hunter"] . "</td><td>";
+                }
+                
+            }
+        }
+         else {
+            echo "<tr>
+                <td colspan='9' style='text-align:center;font-size:20px;font-weight:bold;'>" . "No results
+                    found!" . "</td>
+            <tr>";
+        }
     }
 
                 if (isset($_POST['hunted'])) {
@@ -272,7 +304,8 @@ if (isset($_POST['comp'])) {
 }
 
 #sub_btn:hover,
-#back_btn:hover {
+#back_btn:hover,
+#add_btn:hover {
     background-color: #aaa69d;
     border: #aaa69d solid;
     box-shadow: 0px 0px 40px grey;

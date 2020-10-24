@@ -42,6 +42,8 @@
                     <?php echo $_SESSION['username']?>!</button>
                 <a href="index.php"><button id="footbtn"><i class="fas fa-sign-out-alt"
                             style="font-size:36px;"></i>LOGOUT</button></a>
+                <a href="profile.php"><button id="footbtn"><i class="fas fa-users"
+                            style="font-size:34px;"></i><?php echo " " ,$_SESSION['username']?></button></a>
                 <a href=""><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i> HUNT
                         TASK</button></a>
                 <a href="history.php"><button id="footbtn"><i class="fa fa-server" style="font-size:36px;"></i>
@@ -128,15 +130,6 @@
                     </select><br><br>
                     <input type="submit" name="submit" id="sub_btn" value="View Results">
                 </form>
-                <!-- <form method="post">
-                    <h4>Enter the task you want to hunt -></h4>
-
-                    <input type="text" id="taskid" name="taskid" class="inputvalues" placeholder="Enter Task ID"
-                        style="width: 15%;padding:10px" required />
-
-                    <input type="submit" name="add" id="add_btn" value="Hunt" />
-                    <p>Note->This process cannot be reverted.</p>
-                </form> -->
 
                 <br><a href=" homepage.php">Back to home</a>
             </div>

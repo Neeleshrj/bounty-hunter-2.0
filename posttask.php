@@ -65,6 +65,8 @@ if (isset($_POST['back'])) {
                     <?php echo $_SESSION['username']?>!</button>
                 <a href="index.php"><button id="footbtn"><i class="fas fa-sign-out-alt"
                             style="font-size:36px;"></i>LOGOUT</button></a>
+                <a href="profile.php"><button id="footbtn"><i class="fas fa-users"
+                            style="font-size:34px;"></i><?php echo " " ,$_SESSION['username']?></button></a>
                 <a href="huntask.php"><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i>
                         HUNT
                         TASK</button></a>

@@ -14,19 +14,32 @@
     
     }
     if (isset($_POST['changepass'])){
-                    echo '<script type="text/javascript"> alert("Button Working!") </script>';
                     $opass=$_POST['oldpass'];
+                    $npass=$_POST['newpass'];
                     $userid=$_SESSION['username'];
                     $sql = "SELECT pass FROM userinfo WHERE userid LIKE '$userid' ";
-                    echo $query_run;
-                    $query_run = mysqli_query($con, $sql);
-                    if($opass==$query_run){
-                        echo '<script type="text/javascript"> alert("Working!") </script>';
+                    $result = mysqli_query($con, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    if($opass==$row['pass']){
+                        $sql="UPDATE userinfo SET pass= '$npass' WHERE userid='$userid'";
+                        $query_run = mysqli_query($con, $sql);
+                        if ($query_run) {
+                            echo '<script type="text/javascript"> alert("Password changed Successfully!") </script>';
+                            echo '<script>window.location.href = "./profile.php";</script>';
+                        }
+                        else{
+                            echo '<script type="text/javascript"> alert("Error!") </script>';
+                            echo '<script>window.location.href = "./changepass.php";</script>';
+                        }
+                        
                     }else{
                         echo '<script type="text/javascript"> alert("Old password is wrong!") </script>';
                         echo '<script>window.location.href = "./profile.php";</script>';
                     }
-                }
+    }
+    if (isset($_POST['cancel'])){
+        echo '<script>window.location.href = "./profile.php";</script>';
+    }
     
 
 ?>
@@ -80,31 +93,23 @@
                     $email = $row['email'];
                     $pass = $row['pass'];      
                 ?>
+            <form action="changepass.php" method="post" enctype="multipart/form-data">
+                <input name='oldpass' type='password' id='opass' class='inputvalues' placeholder='Old Password...'
+                    onblur='validate()' /><br>
+                <div id='opass_err' style='display: inline-block'></div><br><br>
 
-            <h1>Profile</h1><br>
-            <?php 
-                if ($_SESSION['gender'] == 'male') {
-                echo '<img class="avatar" src="imgs/ava1.png">';
-            } else if ($_SESSION['gender'] == 'female') {
-                echo '<img class="avatar" src="imgs/ava2.png">';
-            } else {
-                echo '<img class="avatar" src="imgs/ava3.png">';
-            }
-            echo "<br>";
-            
-            ?>
-            <h3>Username:</h3>
-            <h4><?php echo $_SESSION['username']?></h4><br>
-            <h3>Name:</h3>
-            <h4><?php echo $fname ?></h4><br>
-            <h3>Email:</h3>
-            <h4><?php echo $email ?></h4><br>
-            <h3>Contact Number:</h3>
-            <h4><?php echo $cntnumber ?></h4><br>
-            <h3>Password:</h3>
-            <h4><?php echo $pass ?></h4>
-            <a href="changepass.php"><button id="edit" name="edit" onclick="change()"><i class="fas fa-edit"
-                        style="font-size:20px"></i></button></a><br>
+                <input name='newpass' type='password' id='npass' class='inputvalues' placeholder='New Password...'
+                    onblur='validate()' /><br>
+                <div id='npass_err' style='display: inline-block'></div><br><br>
+
+                <input name='cnewpass' type='password' id='cnpass' class='inputvalues'
+                    placeholder='Confirm New Password...' onblur='validate()' /><br>
+                <div id='cnpass_err' style='display: inline-block'></div><br><br>
+
+                <input name='changepass' id='changepass' type='submit' value='Change Password' />
+                <input name='cancel' id='cancel' type='submit' value='Cancel' />
+            </form>
+            <script type="text/javascript" src="js/changepass.js"></script>
         </div>
     </div>
 
@@ -142,10 +147,19 @@
     outline-width: 0;
 }
 
-.avatar {
-    margin-top: 20px;
-    width: 150px;
-    border-radius: 50%;
+#cancel {
+    margin-top: 10px;
+    background-color: red;
+    padding: 5px;
+    color: white;
+    width: 15%;
+    font-weight: normal;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 2px;
+    border: red solid;
+    border-radius: 100px;
+    outline-width: 0;
 }
 
 #edit {
@@ -171,7 +185,7 @@ h4 {
     width: 600px;
     height: auto;
     background-color: #f5f6fa;
-    padding: 30px;
+    padding: 20px;
     border-radius: 30px;
 }
 
@@ -239,6 +253,12 @@ input[type="password"] {
     z-index: 2;
 }
 
+#changepass:hover {
+    background-color: #aaa69d;
+    border: #aaa69d solid;
+    box-shadow: 0px 0px 40px grey;
+    color: black;
+}
 
 ul {
 

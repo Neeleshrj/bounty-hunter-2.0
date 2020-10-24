@@ -2,8 +2,13 @@
 <html>
 <title>Homepage</title>
 
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+
+<head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
 
 <?php 
     
@@ -25,6 +30,12 @@
                         style="font-size:24px;"></i></button></a>
         </ul>
     </div>
+
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+    <script type="text/javascript" src="js/index.js"></script>
+
+
     <div id="main">
         <img src="imgs/work1.jpg" id="bgimage" />
         <center>
@@ -80,17 +91,34 @@
         </div>
     </div>
 
-
-
-
 </body>
-
-
 
 </html>
 
 
 <style>
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #00b894;
+    border: #00b894 solid;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#myBtn:hover {
+    background-color: #555;
+    border: #555 solid;
+}
+
 #contactus {
     height: 400px;
     width: 80%;
