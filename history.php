@@ -23,13 +23,14 @@ if (isset($_POST['comp'])) {
     if ($query_run) {
         echo '<script type="text/javascript"> alert("Task Status updated successfully!") </script>';
         
-    } 
-    }
+            } 
+        }
     else {
         echo '<script type="text/javascript"> alert("Error!Task already completed!") </script>';
     }
-    
 }
+    
+
 ?>
 
 <body style="font-family: 'Lucida Sans';letter-spacing:2px;margin:auto;">
@@ -91,12 +92,12 @@ if (isset($_POST['comp'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $tkid=$row["taskid"] ;
                 echo "<tr><td>" . $row["taskid"] . "</td><td>" . $row["w_desc"] . "</td><td>" . $row["doc"] . "</td><td>" . "</td><td>" . $row["toc"] . "</td><td>" .
-                    $row["city"] . "</td><td>" . $row["money"] . "</td><td>" . $row["status"] . "</td><td>" . $row["hunter"] . "</td><td>". 
+                    $row["city"] . "</td><td>" . $row["money"] . "</td><td>" . $row["status"] . "</td><td>" . $row["hunter"] . "</td><td>".                    
                     "<form action='history.php' method='post'>
                             <input type='hidden' name='taskid' value='".$tkid."' />
                             <input type='hidden' name='status' value='".$row["status"]."' />
-                            <input type='submit' name='comp' id='add_btn' value='Completed' />
-                    </form>" . "</td></tr>";
+                            <input type='submit' name='comp' id='add_btn' value='Completed' />";
+                    "</form>" . "</td></tr>";
                     }
                     } else {
                     echo "<tr>
