@@ -10,10 +10,7 @@
     echo '<script type="text/javascript"> alert("Error!You need to Login First!") </script>';
     echo '<script>window.location.href = "./login.php";</script>';
 }
-    
 
-?>
-<?php
 require 'dbconfig/config.php';
 
 if (isset($_POST['submit'])) {
@@ -27,20 +24,31 @@ if (isset($_POST['submit'])) {
   $image=$_FILES['image']['name'];
   $status = 'pending';
   $hunter = 'none';
+  $balance=$_SESSION['balance'];
 
-  $target= "uploaded-images/".basename($_FILES['image']['name']);
+  if($balance>=$money){
+        $target= "uploaded-images/".basename($_FILES['image']['name']);
 
-  $query = "INSERT INTO taskinfo VALUES(NULL,'$t_userid','$w_desc','$doc','$toc','$city','$money','$image','$status','$hunter')";
-  $query_run = mysqli_query($con, $query);
-  
-  if ($query_run) {
-  
-    move_uploaded_file($_FILES['image']['tmp_name'],$target);
-    echo '<script type="text/javascript"> alert("Task put for hunting!") </script>';
-  } else {
-    echo '<script type="text/javascript"> alert("Error!") </script>';
+        $query = "INSERT INTO taskinfo VALUES(NULL,'$t_userid','$w_desc','$doc','$toc','$city','$money','$image','$status','$hunter')";
+        $query_run = mysqli_query($con, $query);
+        
+        if ($query_run) {
+            move_uploaded_file($_FILES['image']['tmp_name'],$target);
+            $sql="UPDATE userinfo SET balance=(balance-'$money') WHERE userid LIKE '$t_userid' ";
+            $query_run = mysqli_query($con, $sql);
+            if (!$query_run) {
+                echo '<script type="text/javascript"> alert("Error!") </script>';
+            }
+            echo '<script type="text/javascript"> alert("Task put for hunting!") </script>';
+        } else {
+            echo '<script type="text/javascript"> alert("Error!") </script>';
+        }
+    }else{
+      echo '<script type="text/javascript"> alert("You dont have enough balance!") </script>';
+      
   }
-}
+
+  }
 
 if (isset($_POST['back'])) {
     echo '<script>window.location.href = "./homepage.php";</script>';
@@ -49,8 +57,6 @@ if (isset($_POST['back'])) {
 ?>
 
 <body style="font-family: 'Lucida Sans';letter-spacing:2px;margin:auto;">
-
-
 
     <div id="footer">
         <center>

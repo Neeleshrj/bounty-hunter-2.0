@@ -23,10 +23,11 @@ catch (\Exception $e)
 spl_autoload_register(function ($class)
 {
     // project-specific namespace prefix
-    $prefix = 'Razorpay\Api';
+    $prefix ='Razorpay\Api';
 
     // base directory for the namespace prefix
     $base_dir = __DIR__ . '/src/';
+    
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);

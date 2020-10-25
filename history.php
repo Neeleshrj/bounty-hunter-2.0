@@ -13,16 +13,28 @@
 ?>
 
 <?php
-
+    
 if (isset($_POST['comp'])) {
     $tkid = $_POST['taskid'];
     $status=$_POST['status'];
+
+    $sql="SELECT * from taskinfo WHERE taskid='$tkid'";
+    $query_run = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($query_run);
+    $money=$row['money'];
+    $hunter=$row['hunter'];
+    $userid=$_SESSION['username'];
+
     if ($status!="completed"){
         $query = "UPDATE taskinfo SET status ='completed' WHERE taskid='$tkid' AND status LIKE 'in progress' ";
     $query_run = mysqli_query($con, $query);
     if ($query_run) {
-        echo '<script type="text/javascript"> alert("Task Status updated successfully!") </script>';
-        
+                echo '<script type="text/javascript"> alert("Task Status updated successfully!") </script>';
+                $sql="UPDATE userinfo SET balance=(balance+'$money') WHERE userid LIKE '$hunter' ";
+                $query_run = mysqli_query($con, $sql);
+                if(!$query_run){
+                    echo '<script type="text/javascript"> alert("Error!") </script>';
+                }
             } 
         }
     else {
@@ -32,14 +44,30 @@ if (isset($_POST['comp'])) {
 if (isset($_POST['cancel'])) {
     $tkid = $_POST['taskid'];
     $status=$_POST['status'];
+
+
+    $sql="SELECT * from taskinfo WHERE taskid='$tkid'";
+    $query_run = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($query_run);
+    $money=$row['money'];
+    $hunter=$row['hunter'];
+    $userid=$_SESSION['username'];
+
+
+
     if ($status!="completed"){
-        $query = "UPDATE taskinfo SET status ='completed' WHERE taskid='$tkid' AND status LIKE 'pending' ";
+        $query = "UPDATE taskinfo SET status ='cancelled' WHERE taskid='$tkid' AND status LIKE 'pending' ";
     $query_run = mysqli_query($con, $query);
     if ($query_run) {
         echo '<script type="text/javascript"> alert("Task Status updated successfully!") </script>';
-        
-            } 
-        }
+        $sql="UPDATE userinfo SET balance=(balance+'$money') WHERE userid LIKE '$userid' ";    
+        $query_run = mysqli_query($con, $sql);
+                if(!$query_run){
+                    echo '<script type="text/javascript"> alert("Error!") </script>';
+                }
+
+        } 
+    }
     else {
         echo '<script type="text/javascript"> alert("Error!Task already completed!") </script>';
     }

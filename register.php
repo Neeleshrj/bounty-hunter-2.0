@@ -3,6 +3,9 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/register.js">
+
+    </script>
 </head>
 
 <?php
@@ -26,7 +29,7 @@
                     echo '<script type="text/javascript"> alert("Username already exists,try another name") </script>';
                 } else {
 
-                    $query = "INSERT INTO userinfo VALUES('$fname','$gen','$cntnumber','$email','$userid','$pass' )";
+                    $query = "INSERT INTO userinfo VALUES('$fname','$gen','$cntnumber','$email','$userid','$pass',0 )";
                     $query_run = mysqli_query($con, $query);
 
                     if ($query_run) {
@@ -75,8 +78,8 @@
             <form id="register" action="register.php" method="post" enctype="multipart/form-data" autocomplete="off">
 
                 <input name="fname" id="fname" type="text" class="inputvalues"
-                    style="margin-top:25px;margin-bottom:15px;" placeholder="Enter your Full Name"
-                    onblur="validate()" />
+                    style="margin-top:25px;margin-bottom:15px;" placeholder="Enter your Full Name" onblur="validate()"
+                    required />
                 <div id="name_err" style="display: inline-block"></div><br>
                 <br>
 
@@ -93,26 +96,26 @@
 
 
                     <input name="cntnumber" type="tel" style="margin-top:15px;" class="inputvalues"
-                        placeholder="Enter your contact number" /> <br><br>
+                        placeholder="Enter your contact number" required /> <br><br>
 
 
                     <input name="email" id="email" type="email" class="inputvalues" placeholder="Enter your email id"
-                        onblur="validate()" />
+                        onblur="validate()" required />
                     <div id="email_err" style="display: inline-block"></div>
                     <br><br>
 
                     <input name="userid" id="userid" type="text" class="inputvalues" placeholder="Enter a username"
-                        onblur="validate()" />
+                        onblur="validate()" required />
                     <div id="userid_err" style="display: inline-block"></div>
                     <br><br>
 
                     <input name="pass" id="pass" type="password" class="inputvalues" placeholder="Enter a password"
-                        onblur="validate()" />
+                        onblur="validate()" required />
                     <div id="pass_err" style="display: inline-block"></div>
                     <br><br>
 
                     <input name="cpass" id="cpass" type="password" class="inputvalues"
-                        placeholder="Confirm your password" onblur="validate()" style="margin-bottom:15px;" />
+                        placeholder="Confirm your password" onblur="validate()" style="margin-bottom:15px;" required />
                     <div id="cpass_err" style="display: inline-block"></div><br><br>
 
                     <input type="checkbox" id="terms" name="terms" value="True"
@@ -122,10 +125,10 @@
 
 
                     <a href="index.php"><input name="signup_btn" type="submit" id="signup_btn" value="REGISTER" /></a>
-                    <script type="text/javascript" src="js/register.js"></script>
+
                     <br><br>
 
-                    <a href="login.php"><input name="backlg_btn" type="button" id="backlg_btn" value="BACK" /></a>
+                    <a href="index.php"><input name="backlg_btn" type="button" id="backlg_btn" value="BACK" /></a>
 
             </form>
         </div>

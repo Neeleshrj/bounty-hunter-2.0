@@ -17,6 +17,8 @@
                 $row = mysqli_fetch_assoc($query_run);
                 $_SESSION['username'] = $row['userid'];
                 $_SESSION['gender'] = $row['gen'];
+                $_SESSION['balance']=$row['balance'];
+                echo '<script type="text/javascript"> alert("Valid Credentials!") </script>';
                 header('location:homepage.php');
             } else {
                 echo '<script type="text/javascript"> alert("Invalid Credentials!") </script>';
