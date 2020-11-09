@@ -128,7 +128,7 @@
 
                     <br><br>
 
-                    <a href="index.php"><input name="backlg_btn" type="button" id="backlg_btn" value="BACK" /></a>
+                    <a href="login.php"><input name="backlg_btn" type="button" id="backlg_btn" value="BACK" /></a>
 
             </form>
         </div>

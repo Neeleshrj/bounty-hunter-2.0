@@ -7,7 +7,6 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <?php 
