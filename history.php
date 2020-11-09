@@ -35,6 +35,15 @@ if (isset($_POST['comp'])) {
                 if(!$query_run){
                     echo '<script type="text/javascript"> alert("Error!") </script>';
                 }
+                $content="Task status updated";
+                date_default_timezone_set('Asia/Kolkata');
+                $date = date('m/d/Y h:i a', time());
+                $sql = "INSERT INTO notifinfo VALUES('$content','$t_userid','$date')";
+                
+                $query_run = mysqli_query($con, $sql);
+                if (!$query_run) {
+                    echo '<script type="text/javascript"> alert("Error!") </script>';
+            }
             } 
         }
     else {
@@ -91,6 +100,8 @@ if (isset($_POST['cancel'])) {
                     <?php echo $_SESSION['username']?>!</button>
                 <a href="index.php"><button id="footbtn"><i class="fas fa-sign-out-alt"
                             style="font-size:36px;"></i>LOGOUT</button></a>
+                <a href="profile.php"><button id="footbtn"><i class="fas fa-users"
+                            style="font-size:34px;"></i><?php echo " " ,$_SESSION['username']?></button></a>
                 <a href="huntask.php"><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i>
                         HUNT
                         TASK</button></a>

@@ -32,14 +32,26 @@ if (isset($_POST['submit'])) {
         $query = "INSERT INTO taskinfo VALUES(NULL,'$t_userid','$w_desc','$doc','$toc','$city','$money','$image','$status','$hunter')";
         $query_run = mysqli_query($con, $query);
         
-        if ($query_run) {
+       if ($query_run) {
             move_uploaded_file($_FILES['image']['tmp_name'],$target);
             $sql="UPDATE userinfo SET balance=(balance-'$money') WHERE userid LIKE '$t_userid' ";
             $query_run = mysqli_query($con, $sql);
             if (!$query_run) {
                 echo '<script type="text/javascript"> alert("Error!") </script>';
+            }else{
+                echo '<script type="text/javascript"> alert("Task put for hunting!") </script>';
+                $content="Task added";
+                date_default_timezone_set('Asia/Kolkata');
+                $date = date('m/d/Y h:i a', time());
+                $user=$_SESSION['username'];
+                $sql = "INSERT INTO notifinfo VALUES(NULL,'$content','$t_userid','$date')";
+                
+                $query_run = mysqli_query($con, $sql);
+                if (!$query_run) {
+                    echo '<script type="text/javascript"> alert("Error!") </script>';
             }
-            echo '<script type="text/javascript"> alert("Task put for hunting!") </script>';
+            
+            }
         } else {
             echo '<script type="text/javascript"> alert("Error!") </script>';
         }
@@ -49,7 +61,6 @@ if (isset($_POST['submit'])) {
   }
 
   }
-
 if (isset($_POST['back'])) {
     echo '<script>window.location.href = "./homepage.php";</script>';
 }

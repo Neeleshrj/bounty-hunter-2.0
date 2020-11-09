@@ -14,11 +14,9 @@
     
     }
     if (isset($_POST['changepass'])){
-                    echo '<script type="text/javascript"> alert("Button Working!") </script>';
                     $opass=$_POST['oldpass'];
                     $userid=$_SESSION['username'];
                     $sql = "SELECT pass FROM userinfo WHERE userid LIKE '$userid' ";
-                    echo $query_run;
                     $query_run = mysqli_query($con, $sql);
                     if($opass==$query_run){
                         echo '<script type="text/javascript"> alert("Working!") </script>';

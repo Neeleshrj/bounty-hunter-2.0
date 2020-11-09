@@ -1,8 +1,10 @@
 <html>
 
-<title>Mainpage</title>
+<title>Dashboard</title>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+
+
 <?php 
     session_start();
     if(!isset($_SESSION['username'])){
@@ -19,7 +21,8 @@
     <div id="navbar">
         <ul>
             <img src="imgs/logo2.png" id="logoimg" />
-
+            <a href="notifications.php"><button id="navbarbtn"><i class="fas fa-bell "
+                        style="font-size:36px;"></i>Notifications</button></a>
             <a href="profile.php"><button id="navbarbtn"><i class="fas fa-users"
                         style="font-size:34px;"></i><?php echo " " ,$_SESSION['username']?></button></a>
             <button style="top: 0px;
@@ -33,6 +36,7 @@
         </ul>
 
     </div>
+
     <div id="main_body">
         <div id="message">
             <p>Many are already using Bounty Hunter to find odd jobs and generate an income.What are you waiting for?
@@ -51,8 +55,7 @@
                 <a href="huntask.php"><button id="footbtn"><i class="fas fa-binoculars" style="font-size:36px;"></i>
                         HUNT
                         TASK</button></a>
-                <a href="notifications.php"><button id="footbtn"><i class="fas fa-bell "
-                            style="font-size:36px;"></i>Notifications</button></a>
+
                 <a href="index.php"><button id="footbtn"><i class="fas fa-sign-out-alt"
                             style="font-size:36px;"></i>LOGOUT</button></a>
             </ul>

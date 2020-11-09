@@ -21,6 +21,33 @@
     $query_run = mysqli_query($con, $query);
     if ($query_run) {
       echo '<script type="text/javascript"> alert("Task accepted successfully!") </script>';
+        $content="Task accepted";
+        date_default_timezone_set('Asia/Kolkata');
+        $date = date('m/d/Y h:i a', time());
+        $sql = "INSERT INTO notifinfo VALUES(NULL,'$content','$userid','$date')";
+        
+        $query_run = mysqli_query($con, $sql);
+        if (!$query_run) {
+            echo '<script type="text/javascript"> alert("Error!") </script>';
+        }
+
+        $sql="SELECT * FROM taskinfo WHERE taskid='$taskid'";
+        $query_run = mysqli_query($con, $sql);
+        if (!$query_run) {
+            echo '<script type="text/javascript"> alert("Error!") </script>';
+        }
+        $row = mysqli_fetch_assoc($query_run);
+        $user=$row['t_userid'];
+        
+        $content="Task accepted by ".$userid;
+        $sql = "INSERT INTO notifinfo VALUES(NULL,'$content','$user','$date')";
+        $query_run = mysqli_query($con, $sql);
+        if (!$query_run) {
+            echo '<script type="text/javascript"> alert("Error!") </script>';
+        }
+
+
+        
     } else {
       echo '<script type="text/javascript"> alert("Error!") </script>';
     }
@@ -76,7 +103,7 @@
                         <p><?php echo $row["w_desc"]?></p>
                         <h3>Image:</h3>
                         <?php 
-                            if($row["image"]=="blank"){
+                            if($row["image"]==""){
                                 echo "No image Attached";
                             }else{
                                 echo "<img id='images' src='uploaded-images/".$row["image"]."'/>";
@@ -105,13 +132,6 @@
 
             <div id="formbox">
                 <h4>Find tasks based on location -></h4>
-
-                <!-- <form method="post">
-                    <input type="text" id="city" name="city" class="inputvalues" placeholder="Enter City Name"
-                        required />
-
-                    <input type="submit" name="submit" id="sub_btn" value="View Results">
-                </form> -->
                 <form method="post">
                     <select class="form-control" name="city" id="city">
 
