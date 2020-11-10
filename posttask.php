@@ -45,11 +45,10 @@ if (isset($_POST['submit'])) {
                 $date = date('m/d/Y h:i a', time());
                 $user=$_SESSION['username'];
                 $sql = "INSERT INTO notifinfo VALUES(NULL,'$content','$t_userid','$date')";
-                
                 $query_run = mysqli_query($con, $sql);
                 if (!$query_run) {
                     echo '<script type="text/javascript"> alert("Error!") </script>';
-            }
+                }
             
             }
         } else {

@@ -52,7 +52,7 @@
         <div id="main_body">
             <div id="notif_box">
                 <?php 
-                $sql="SELECT * FROM notifinfo WHERE user='$userid'";
+                $sql="SELECT * FROM notifinfo WHERE user='$userid' ORDER BY date DESC";
                 $query_run = mysqli_query($con, $sql);
                 if (mysqli_num_rows($query_run) > 0) {
                 while($row = mysqli_fetch_assoc($query_run)) { 

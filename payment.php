@@ -21,10 +21,18 @@
     $query_run = mysqli_query($con, $sql);
     if ($query_run) {
         echo '<script type="text/javascript"> alert("Amount Added Successfully!") </script>';
+                $content=$totalAmount." added to account on";
+                date_default_timezone_set('Asia/Kolkata');
+                $date = date('m/d/Y h:i a', time());
+                $sql = "INSERT INTO notifinfo VALUES(NULL,'$content','$userid','$date')";
+                $query_run = mysqli_query($con, $sql);
+                if (!$query_run) {
+                    echo '<script type="text/javascript"> alert("Error!") </script>';
+                }
         echo '<script>window.location.href = "./profile.php";</script>';
     }
     else{
-        echo '<script type="text/javascript"> alert("Error!") </script>';
+        echo '<script type="text/javascript"> alert("Error on adding!") </script>';
         echo '<script>window.location.href = "./addmoney.php";</script>';
     }
 
